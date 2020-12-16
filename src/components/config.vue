@@ -1287,14 +1287,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import {
-    required,
-    requiredIf,
-    integer,
-    ipAddress,
-    or,
-    url,
-} from 'vuelidate/lib/validators';
+import { integer, required, requiredIf } from 'vuelidate/lib/validators';
 import { omit } from 'lodash-es';
 import { InputActionService } from '../services/input-action.service';
 import { LocalStorageService } from '../services/local-storage.service';
@@ -1321,7 +1314,7 @@ const { ipcRenderer } = require('electron');
         endpoint: {
             required,
             // @ts-ignore
-            or: or(ipAddress, url),
+            // or: or(ipAddress, url),
         },
         port: {
             required,
@@ -1671,9 +1664,10 @@ export default class Configuration extends Vue {
             return errors;
         }
 
-        if (!this.$v.endpoint.or) {
-            errors.push(this.$t('settings.messages.ipOrUrl'));
-        }
+        // if (!this.$v.endpoint.or) {
+        //     debugger
+        //     errors.push(this.$t('settings.messages.ipOrUrl'));
+        // }
 
         if (!this.$v.endpoint.required) {
             errors.push(this.$t('common.validation.required'));
